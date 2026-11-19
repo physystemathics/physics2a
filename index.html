@@ -1,0 +1,693 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>FISICA-II</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: hsl(60, 100%, 80%) !important;
+    min-height: 100vh;
+  }
+
+  .main {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: hsl(60, 100%, 80%) !important;
+    
+    /* 📱 Evita que el texto se desborde hacia los costados */
+    max-width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word; /* Rompe palabras largas si es necesario */
+    
+    /* 📱 Tamaño de letra inteligente: 22px en celular, crece hasta 35px en PC */
+    font-size: clamp(20px, 4.5vw, 35px); 
+    
+    /* 📱 Márgenes internos cómodos para que no toque los bordes del celular */
+    padding: 20px clamp(15px, 5vw, 50px); 
+    
+    min-height: 100vh;
+    } 
+    .escala:hover{
+        transition: 1.5s;
+        scale: 1.4;
+    }
+    .escala1:hover{
+        transition: 1.5s;
+        scale: 1;
+    }
+    .disp{
+        font-size: 1em;
+    padding: 1rem;
+    display: inline-block;
+    border: solid 3px red;
+    
+    }
+    .zoomder {
+      width: 100%;
+      transition: transform 0.3s;
+      transform-origin: left center;
+    }
+    .zoomder:hover{
+      transform: scale(1.8);
+    }
+    /*ul.reloj-pc{
+      font-family: 'Consolas', monospace;
+      font-size: 1.2rem;
+      background: #111827;
+      color: #00ff88;
+    }
+    ul.reloj-pc li{
+      margin:10px 0;
+      font-size: 1.1rem;
+    }
+    .hora-grande {
+      font-size: 2.5rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+    }*/
+
+    
+
+</style>
+<style>
+  #li-reloj {
+      background-color: #111827;
+      color: #00ff88;
+      padding: 5px 15px; /* Un poco más de espacio interno para que respire */
+      border-radius: 8px;
+      font-weight: bold;
+      font-family: 'Consolas', monospace;
+      text-align: center;
+      
+      /* 📱 TAMAÑO ADAPTABLE INTELIGENTE: */
+      /* Medirá 1.8rem en celulares y crecerá hasta 3.5rem en computadoras */
+      font-size: clamp(1.8rem, 6vw, 3.5rem); 
+      
+      /* Evita que el reloj se desborde si el contenedor es estrecho */
+      max-width: 100%;
+      box-sizing: border-box;
+  }
+  .table-responsive table {
+    font-size: clamp(14px, 3.5vw, 18px) !important;
+}
+
+/* Achica un poco más los títulos de las columnas para que quepan mejor */
+.table-responsive th {
+    font-size: clamp(13px, 3.2vw, 16px) !important;
+    white-space: nowrap; /* Evita que los títulos se amontonen feo hacia abajo */
+}
+</style>
+/* para animacion gif y png */
+<link  rel="stylesheet" href="styles.css">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Updated: Apr 20 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <!--<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script> -->
+    <!-- desxativar internet -->
+    <!----> 
+    <script id="MathJax-script" async src="./js/texmmlchtml.js"></script>
+    <script>
+        MathJax = {
+          tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+          },
+          svg: {
+            fontCache: 'global'
+          }
+        };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+    </script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center" style="background-color: rgb(13, 80, 43);">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block text-white">  FISICA II</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn text-white"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+    
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+         <li class="">
+          <a class="nav-link nav-icon" href="index.html">
+            <img src="assets/img/logo.png" alt="">
+            <span class="badge bg-primary badge-number">1</span>
+          </a><!-- End Notification Icon -->
+        </li><!-- End Notification Nav -->
+        
+        <li class="">
+          <a class="nav-link nav-icon" href="index.html">
+            <img src="assets/img/logo.png" alt="">
+            <span class="badge bg-primary badge-number">2</span>
+          </a><!-- End Notification Icon -->
+        </li><!-- End Notification Nav -->
+        
+        <li class="">
+          <a class="nav-link nav-icon" href="index.html">
+            <img src="assets/img/logo.png" alt="">
+            <span class="badge bg-primary badge-number">3</span>
+          </a><!-- End Notification Icon -->
+        </li><!-- End Notification Nav -->
+
+        
+        <li id="li-reloj">
+          00:00:00
+        </li>
+
+
+      </ul>
+
+      <script>
+        function actualizarHora(){
+          const ahora=new Date();
+          const hora= ahora.toLocaleTimeString('es-BO',{ hour12:false});
+          document.getElementById('li-reloj').textContent=hora;
+        }
+        
+        actualizarHora();
+        setInterval(actualizarHora, 1000);
+      </script>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar" style="background-color: rgb(0, 80, 0);">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed text-white" style="background-color: rgb(0, 90, 0);" href="index.html">
+          <i class="bi bi-person"></i>
+          <span >PERFIL</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item" >
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="description.html">
+          <i class="bi bi-grid text-white"></i>
+          <span>DESCRIPCIÓN</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item" >
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="contents.html">
+          <i class="bi bi-menu-button-wide text-white"></i>
+          <span>CONTENIDO</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item" >
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="bibliografia.html">
+          <i class="bi bi-menu-button-wide text-white"></i>
+          <span>BIBLIOGRAFÍA</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+      
+      <li class="nav-heading">MÓDULOS</li>
+      
+      <li class="nav-item">
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="mod1.html">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>CAMPO</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="mod2.html">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>CAPACITORES</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link text-white" style="background-color: rgb(0, 90, 0);" href="mod3.html">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>CORRIENTE</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar <main id="main" class="main"> -->
+  <main id="main" class="main">
+    
+       <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA -->
+        <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA -->
+
+      <p><b>10.5 Condensadores y dieléctricos</b></p>
+      <p>Un dieléctrico es un material aislante que se introduce entre las armaduras de un condensador y permite aumentar
+         la capacidad con respecto al vacío.</p>
+
+      <div class="row">
+        <div class="col-md-6 pt-3 pb-3  h1">
+          <ul><li>Vacío</li></ul>
+          <center><img class="" src="img/10-8.png" width="80%"></center>
+          \[C_0=\varepsilon_0 \frac{A}{d}\]
+          \[E_0\,d=V_0\]
+          \[C_0=\frac{q}{V_0}\]
+        </div>
+        <div class="col-md-6 pt-3 pb-3  h1">
+          <ul><li>Con Diel&eacute;ctrico</li></ul>
+          <center><img class="" src="img/10-9.jpg" width="80%"></center>
+            \[E=E_0-E_{ind}&lt;E_0\]
+            \[V&lt;V_0\]
+            \[C=\frac{q}{V}\]
+        </div>
+      </div>
+      \[C_0&lt;C\]
+      \[C=K\,C_0\]
+      \[K:\text{Constante Diel&eacute;ctrico}\]
+      \[K=\frac{\varepsilon}{\varepsilon_0}=\varepsilon_r \qquad \text{Permitividad relativa}\]
+      \[C=K\,\varepsilon_0 \frac{A}{d}\]
+      <div class="row border-danger ">
+        <center><div class="col-md-8 pt-3 pb-3 border border-danger h1">
+          \[C=\varepsilon \frac{A}{d}\]
+        </div></center>
+        <!-- NOMBRE FORMULA -->
+      </div><br>
+      <div class="row">
+        <div class="col-md-6 pt-3 pb-3  h1">
+            \[K=\frac{E_0}{E}\]
+        </div>
+        <div class="col-md-6 pt-3 pb-3  h1">
+          \[K=\frac{V}{V_0}\]
+        </div>
+      </div>
+      <p>Si aplicamos la ley de Gauss a un condensador plano:</p>
+        <ul><li>Con Diel&eacute;ctrico</li></ul>            
+        \[\oint\!\!\!\!\int_{(A)} \vec{E}\cdot d\vec{s}=\frac{q-q^l}{\varepsilon_{0}}\]
+        \[E\,A=\frac{q-q^l}{\varepsilon_{0}}\]
+        \[\varepsilon_{0}\,E=\frac{q}{A}-\frac{q^l}{A}\]
+        \[\varepsilon_{0}\,E=D-P\]
+        <div class="row border-danger ">
+          <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+              <div style="min-width: 550px; padding-bottom: 5px;">
+                \[\vec{D}=\varepsilon_{0}\,\vec{E}+\vec{P}\]
+            </div>
+          </div>
+          <!-- NOMBRE FORMULA -->
+          <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+              <center><b>Ecuación 10.13</b></center>
+        </div>
+      </div>
+
+      <ul><li>Vacío</li></ul>
+      \[P=0 \qquad ; \qquad q^l=0\]
+      <p>Para el vacío, el desplazamiento:</p>
+      \[D=\varepsilon_{0}\,E\]
+      <p>Si aplicamos, la ley de Gauss</p>
+      \[\oint\!\!\!\!\int \vec{E}\cdot d\vec{s}=\frac{q}{\varepsilon_{0}}\]
+      \[\oint\!\!\!\!\int \varepsilon_{0}\vec{E}\cdot d\vec{s}=q\]
+      <div class="row border-danger ">
+        <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+            <div style="min-width: 550px; padding-bottom: 5px;">
+              \[\oint\!\!\!\!\int \vec{D}\cdot d\vec{s}=q\]
+          </div>
+        </div>
+        <!-- NOMBRE FORMULA -->
+        <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+            <center><b>Ecuación 10.14</b></center>
+      </div>
+      </div>
+      <p>Además:</p>
+      \[q^l=q\left(1-\frac{1}{K}\right)\]
+      \[K:\text{Constante Diel&eacute;ctrico}\]
+      <p>No olvidar que:</p>
+      \[\vec{D}=\varepsilon_{0}\,\vec{E}+\vec{P}\]
+      <center><p><b>Suma de los 3 vectores.</b></p></center>
+      <br><br>
+      <hr>
+      <br><br>
+    
+      <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA -->
+     <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA --> <!-- NOMBRE FORMULA -->
+
+      <p><b>11 FUNDAMENTOS DE CORRIENTE CONTINUA Y CIRCUITOS</b></p>
+      <p><b>11.1 Corriente eléctrica</b></p>
+      <p>Se define la intensidad de corriente eléctrica como la cantidad de carga que atraviesa la sección transversal de un 
+        conductor en la unidad de tiempo.</p>
+      
+
+        \[i=\frac{q}{t}\]
+        Donde:
+        <center>i: Intensidad de corriente en Amperios [Amp] <br>
+          q: Carga eléctrica en Coulombs [C] <br>
+          t: tiempo [s]</center>
+      <p><b>11.4 Resistencia</b></p>
+      <p>Se denomina a la propiedad que tienen los materiales de oponerse al paso de la corriente eléctrica.</p>
+      <p>Para encontrar una ecuación que permita demostrar que la resistencia eléctrica de un material depende de 
+        la geometría (longitud y área) y del material (resistividad) vamos a suponer:</p>
+
+
+
+      <p>Si n es el n&uacute;mero de electrones por unidad de Volumen.</p>
+      <p>La carga total:</p>
+      \[q_t=n\,(Vol)\,e\]
+      \[q_t=n\,(A\,l)\,e\]
+      <p>El electr&oacute;n, recorre:</p>
+      \[l=v\,\Delta t\]
+      <p>La intensidad de corriente (microscópico):</p>
+      \[i=\frac{q_t}{\Delta t}\]
+      <p>Reemplazando:</p>
+      \[i=\frac{n\,(A\,v\,\Delta t)\,e}{\Delta t}\]
+      \[i=n\,e\,A\,v_d\]
+      <p>Velocidad de desplazamiento</p>
+      \[v_d=\frac{i}{n\,e\,A}\quad \left[\frac{m}{s}\right]\]
+      <p>La densidad de corriente</p>
+      \[J=\frac{i}{A} \quad \left[\frac{Amp}{m^2}\right]\]
+      \[v_d=\frac{J}{n\,e}\quad \left[\frac{m}{s}\right]\]
+      <div class="row border-danger ">
+        <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+            <div style="min-width: 550px; padding-bottom: 5px;">
+              \[J=v_d\,n\,e\]
+          </div>
+        </div>
+        <!-- NOMBRE FORMULA -->
+        <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+            <center><b>Ecuación 11.1</b></center>
+      </div>
+      <p><b>Ejemplo: </b>\(J_{cu}=2,5\,\left[\frac{Amp}{mm^2}\right]\)</p>
+      <hr>
+      <p>Adem&aacute;s:</p>
+      \[\vec{J}=-n\,e\,\vec{v}_d\]
+      \[i=\vec{J}\cdot\vec{A}\]
+      \[i=\iint\vec{J}\cdot d\vec{A}\]
+      <p>La resistencia de un conductor entre dos puntos, al cual le aplicamos un d.d.p V, entre esos puntos y midiendo
+        la corriente (i).</p>
+
+
+
+        \[R=\frac{V}{i}\]
+        \[R=\frac{\int \vec{E}\cdot d\vec{l}}{\iint \vec{J}\cdot d\vec{A}}=\frac{E\,l}{J\,A}\]
+        <p>Ley de OHM “puntual”</p>
+        <div class="row border-danger ">
+          <center><div class="col-md-8 pt-3 pb-3 border border-danger h1">
+            \[\rho=\frac{E}{J}\quad [&ohm; - m]\]
+          </div></center>
+          <!-- NOMBRE FORMULA -->
+        </div>
+        \[\rho : Resistividad\]
+        <p><b>Ejemplo: </b>\(\rho_{cu}=\frac{1}{56}\,\left[\frac{&ohm;\,mm^2}{m}\right]\)</p>
+        <hr>
+        <p>Luego,</p>
+        <div class="row border-danger ">
+          <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+              <div style="min-width: 550px; padding-bottom: 5px;">
+                \[R=\frac{\rho\,l}{A}\]
+            </div>
+          </div>
+          <!-- NOMBRE FORMULA -->
+          <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+              <center><b>Ecuación 11.2</b></center>
+        </div>
+        \[R\propto l\]
+        \[R\propto \frac{1}{A}\]
+        <p>La Concuctividad es una cantidad rec&iacute;proca a la Resistividad. </p>
+        <div class="row border-danger ">
+          <center><div class="col-md-8 pt-3 pb-3 border border-danger h1">
+            \[C=\frac{1}{\rho}\quad [&ohm; - m]^{-1}\]
+          </div></center>
+          <!-- NOMBRE FORMULA -->
+        </div>
+        <p>La conductancia</p>
+        <div class="row border-danger ">
+          <center><div class="col-md-8 pt-3 pb-3 border border-danger h1">
+            \[G=\frac{1}{R}\quad [&ohm;]^{-1}\]
+          </div></center>
+          <!-- NOMBRE FORMULA -->
+        </div>
+        <p>La resistencia eléctrica:</p>
+        \[R=\frac{\rho\,l}{A}\]
+        \[dR=\frac{\partial R}{\partial \rho} dR+\frac{\partial R}{\partial l} dl+\frac{\partial R}{\partial A} dA\]
+        <p>Por lo tanto,</p>
+        <div class="row border-danger ">
+          <center><div class="col-md-8 pt-3 pb-3 border border-danger h1">
+            \[R_t=R\pm dR\]
+          </div></center>
+          <!-- NOMBRE FORMULA -->
+        </div><br><br><br>
+
+        <p>¿<u>Cómo medimos / calculamos la resistencia</u>?</p>
+        
+        <p>Por F&oacute;rmula:</p>
+        <div class="row border-danger ">
+          <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+              <div style="min-width: 550px; padding-bottom: 5px;">
+                \[R=\frac{\rho\,l}{A}\]
+            </div>
+          </div>
+          <!-- NOMBRE FORMULA -->
+          <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+              <center><b>Ecuación 11.4</b></center>
+        </div>
+        <p>Con instrumentos eléctricos:</p>
+        <div class="row border-danger ">
+          <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+              <div style="min-width: 550px; padding-bottom: 5px;">
+                \[R=\frac{V}{i}\]
+            </div>
+          </div>
+          <!-- NOMBRE FORMULA -->
+          <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+              <center><b>Ecuación 11.5</b></center>
+        </div><br>
+        <p><b>11.4.1 Código de colores</b></p>
+        <div class="row border-danger ">
+          <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+              <div style="min-width: 550px; padding-bottom: 5px;">
+                \[R=A\,B\times 10^C \pm \%\,D\]
+            </div>
+          </div>
+          <!-- NOMBRE FORMULA -->
+          <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+              <center><b>Ecuación 11.6</b></center>
+        </div><br>
+        <figure>
+          <center><img class="" src="img/fig11-14.jpg" width="90%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>Figura 11-14 </b>Código de Colores  </i></figcaption>      
+        </figure><br>
+        <figure>
+          <center><img class="" src="img/fig11-15.png" width="90%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>fig11-15 </b>Tabla Código de Colores</i></figcaption>      
+        </figure><br>
+
+        <p><b>11.5 Ley de OHM</b></p>
+        <p>Si se tiene una resistencia eléctrica a la cual se aplica una diferencia de potencial formando un circuito entonces 
+          a la corriente que circula en el circuito es directamente proporcional a la diferencia de potencial. Efectuado por la 
+          fuente.</p>
+          <figure>
+          <center><img class="" src="img/fig11-16.png" width="90%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>Figura 11-16 </b>Ley de Ohm </i></figcaption>      
+        </figure><br>
+          <p>Ley de OHM</p>
+          \[i \propto V\]
+          \[V=R\,i\]
+          \[R=\frac{V}{i}\quad [&ohm;]\]
+          <figure>
+          <center><img class="" src="img/fig11-17.png" width="90%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>Figura 11-17 </b>Gr&aacute;fica 𝑉 𝑣𝑠.𝑖 </i></figcaption>      
+        </figure><br>
+
+
+          <p><b>Gr&aacute;fica: <u>V vs i </u></b></p>
+          \[tan \theta =\frac{\Delta V}{\Delta i}=R\]
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[V=R\,i\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.7</b></center>
+          </div><br>
+          <p><b>11.6 Conexiones de resistencias.</b></p>
+          <p>Al igual que los condensadores de las resistencias eléctricas pueden conectarse en: serie, paralelo y mixtas.</p>
+          <p><b>11.6.1 Conexiones en serie</b></p>
+          <figure>
+          <center><img class="" src="img/fig11-18.png" width="90%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>Figura 9-6 </b>Conexión Serie</i></figcaption>      
+        </figure><br>
+          <p>Se conectan sobre una misma línea (un mismo cable).</p>
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[i=i_1=i_2=i_3\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.8</b></center>
+          </div><br>
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[V=V_1+V_2+V_3\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.9</b></center>
+          </div>
+          \[V=i_1R_1+i_2R_2+i_3R_3=i(R_1+R_2+R_3)\]
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[R_{eq}=\sum R_i\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.10</b></center>
+          </div><br>
+          <p><b>11.6.2 Conexión en paralelo</b></p>
+          <figure>
+          <center><img class="" src="img/fig11-19.png" width="100%"></center><br>
+          <figcaption class="text text-center text-primary h4"><i><b>Figura 9-6 </b>Conexión en Paralelo </i></figcaption>      
+        </figure><br>
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[i=i_1+i_2+i_3\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.11</b></center>
+          </div><br>
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[V=V_1=V_2=V_3\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.12</b></center>
+          </div>
+          \[i=\frac{V_1}{R_1}+\frac{V_2}{R_2}+\frac{V_3}{R_3}\]
+          \[i=v\left(\frac{1}{R_1}+\frac{1}{R_2}+\frac{1}{R_3}\right)\]
+          <div class="row border-danger ">
+            <div class="col-md-9 pt-3 pb-3 border border-danger h1 escala">
+                <div style="min-width: 550px; padding-bottom: 5px;">
+                  \[\frac{1}{R_{eq}}=\sum \frac{1}{R_i}\]
+              </div>
+            </div>
+            <!-- NOMBRE FORMULA -->
+            <div class="col-md-3 pt-3 pb-3 border border-danger h4">
+                <center><b>Ecuación 11.13</b></center>
+          </div><br>
+
+
+
+
+
+
+
+
+        
+
+
+    
+                
+                    
+                    
+
+
+
+
+
+  </main>
+  <!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
